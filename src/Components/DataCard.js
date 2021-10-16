@@ -6,7 +6,7 @@ import {
   BsFillArrowDownCircleFill,
 } from "react-icons/bs";
 
-export const DataCard = ({ el }) => {
+export const DataCard = ({ el, props }) => {
   const changes = useSelector((state) => state.changes);
   return (
     <div>

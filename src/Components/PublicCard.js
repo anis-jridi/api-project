@@ -9,11 +9,10 @@ const PublicCard = ({ el }) => {
     <div>
       <Card style={{ width: "15rem" }} className="m-2">
         <Card.Body>
-          <Card.Title> Symbol: {el.API} </Card.Title>
-          <Card.Text>Price Change: {el.Description}</Card.Text>
-          <Card.Text> Last Price: {el.Link} </Card.Text>
-          <Card.Text> Open Price: {el.openPrice} </Card.Text>
-          <Card.Text> {el.Category} </Card.Text>
+          <Card.Title> API: {el.API} </Card.Title>
+          <Card.Text>Description: {el.Description}</Card.Text>
+          <Card.Text> Link: {el.Link} </Card.Text>
+          <Card.Text> Category:{el.Category} </Card.Text>
           <Button variant="primary">INFO </Button>
         </Card.Body>
       </Card>

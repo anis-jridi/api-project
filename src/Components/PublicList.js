@@ -6,7 +6,7 @@ import { handelSetPublic } from "../Redux/action";
 import { Spinner, Button } from "react-bootstrap";
 
 const PublicList = () => {
-  const publics = useSelector((state) => state.publics);
+  const publics = useSelector((state) => state.allPublics.publics);
   const dispatch = useDispatch();
 
   const [pub, setPub] = useState([]);
@@ -15,10 +15,10 @@ const PublicList = () => {
   useEffect(() => {
     const getPub = async () => {
       try {
-        let res = await axios.get("https://api.publicapis.org/entries");
+        let res = await axios.get("https://randomuser.me/api/");
         setPub(res.data);
         setLoading(false);
-        dispatch(handelSetPublic(res.data));
+        dispatch(handelSetPublic(res.data.entries));
       } catch (error) {
         console.log(error);
       }
@@ -45,8 +45,15 @@ const PublicList = () => {
   }
 
   return (
-    <div>
-      {pub.map((el, i) => (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        marginLeft: "150px",
+        marginRight: "100px",
+      }}
+    >
+      {publics.map((el, i) => (
         <PublicCard el={el} key={i} />
       ))}
     </div>

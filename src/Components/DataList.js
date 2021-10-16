@@ -6,7 +6,7 @@ import { DataCard } from "./DataCard";
 import { handelSetChange } from "../Redux/action";
 
 const DataList = () => {
-  const changes = useSelector((state) => state.changes);
+  const changes = useSelector((state) => state.allChanges.changes);
   const dispatch = useDispatch();
 
   const [user, setUser] = useState([]);
@@ -18,9 +18,9 @@ const DataList = () => {
         let res = await axios.get(
           "https://api2.binance.com/api/v3/ticker/24hr"
         );
-        setUser(res.data);
-        setLoading(false);
         dispatch(handelSetChange(res.data));
+        console.log(res.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -56,7 +56,7 @@ const DataList = () => {
         marginRight: "100px",
       }}
     >
-      {user.map((el, i) => (
+      {changes.map((el, i) => (
         <DataCard el={el} key={i} />
       ))}
     </div>
