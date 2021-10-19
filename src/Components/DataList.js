@@ -4,6 +4,7 @@ import { Spinner, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { DataCard } from "./DataCard";
 import { handelSetChange } from "../Redux/action";
+import AddBinance from "./AddBinance";
 
 const DataList = () => {
   const changes = useSelector((state) => state.allChanges.changes);
@@ -33,7 +34,7 @@ const DataList = () => {
       <>
         <Spinner className="spinner" />
         <span className="visually-hidden">Loading...</span>
-        <Button variant="primary" disabled>
+        <Button variant="outline-success" disabled>
           <Spinner
             as="span"
             animation="grow"
@@ -48,17 +49,20 @@ const DataList = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        marginLeft: "150px",
-        marginRight: "100px",
-      }}
-    >
-      {changes.map((el, i) => (
-        <DataCard el={el} key={i} />
-      ))}
+    <div>
+      <AddBinance />
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          marginLeft: "150px",
+          marginRight: "100px",
+        }}
+      >
+        {changes.map((el, i) => (
+          <DataCard binance={el} key={i} />
+        ))}
+      </div>
     </div>
   );
 };

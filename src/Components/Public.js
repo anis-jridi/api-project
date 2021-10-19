@@ -1,28 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Button, Spinner } from "react-bootstrap";
-import {
-  BsFillArrowDownCircleFill,
-  BsFillArrowUpCircleFill,
-} from "react-icons/bs";
 
-const Binance = ({ match }) => {
-  const [user, setUser] = useState([]);
+const Public = ({ match }) => {
+  const [pub, setPub] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getOneUser = async () => {
+    const getOnePub = async () => {
       try {
         let res = await axios.get(
-          `https://api2.binance.com/api/v3/ticker/24hr/${match.params.id}`
+          `https://api.publicapis.org/entries/${match.params.id}`
         );
-        setUser(res.data);
+        setPub(res.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
-    getOneUser();
+    getOnePub();
   }, [match.params.id]);
 
   if (loading === true) {
@@ -48,24 +44,14 @@ const Binance = ({ match }) => {
     <div>
       <Card style={{ width: "15rem" }} className="m-2">
         <Card.Body>
-          <Card.Title> Symbol: {user.symbol} </Card.Title>
-          <Card.Text>Price Change: {user.priceChange}</Card.Text>
-          <Card.Text> Last Price: {user.lastPrice} </Card.Text>
-          <Card.Text> Open Price: {user.openPrice} </Card.Text>
-          <Card.Text>
-            {" "}
-            <BsFillArrowUpCircleFill style={{ color: "green" }} /> High Price:{" "}
-            {user.highPrice}{" "}
-          </Card.Text>
-          <Card.Text>
-            {" "}
-            <BsFillArrowDownCircleFill style={{ color: "red" }} />
-            Low Price: {user.lowPrice}{" "}
-          </Card.Text>
+          <Card.Title> API: {pub.API} </Card.Title>
+          <Card.Text>Description: {pub.Description}</Card.Text>
+          <Card.Text> Link: {pub.Link} </Card.Text>
+          <Card.Text> Category:{pub.Category} </Card.Text>
         </Card.Body>
       </Card>
     </div>
   );
 };
 
-export default Binance;
+export default Public;
